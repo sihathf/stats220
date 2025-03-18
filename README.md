@@ -8,3 +8,10 @@ A little about me:
 - I am taking STATS 220 to learn about data analysis and how to apply Stats methods in the real world.
 - I am interested in learning about how data can be visualized and understood.  
 A meme that captures how I currently feel about my university studies is![](https://c.tenor.com/8druEACXtX8AAAAd/tenor.gif)
+
+
+My University Experience:
+
+- As a Computer Science student, I've gained a strong foundation in problem-solving, algorithms, and programming languages.
+- I’ve been working on projects that involve data analysis, algorithm optimization, and software design.
+- My university journey has been a mix of challenges and learning opportunities, from tackling tough coding problems to understanding the theory behind algorithms and statistics.
