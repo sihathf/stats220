@@ -20,5 +20,4 @@
 🎓 University of Auckland – [Visit my university](https://www.auckland.ac.nz/en.html)
 
 
-![University life in a nutshell]([https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2huZnF0NW11cjhqdG52emxlNGc5ZGZ4Z2Z6eDAzMWJtbDJtbDJ4MyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/WpF0uxVfGdDSY/giphy.gif](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeXUwZHo1bG80YmR1OTRyYjR0MjlqeTZ3cmg2dDkyZHhtb3p0bzNsMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KB7Moe2Oj0BXeDjvDp/giphy.gif))
-
+![University life in a nutshell]([https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2huZnF0NW11cjhqdG52emxlNGc5ZGZ4Z2Z6eDAzMWJtbDJtbDJ4MyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/WpF0uxVfGdDSY/giphy.gif])
