@@ -20,4 +20,5 @@
 🎓 University of Auckland – [Visit my university](https://www.auckland.ac.nz/en.html)
 
 
-dwdw[](https://c.tenor.com/8druEACXtX8AAAAd/tenor.gif)
+![When university gets tough](https://c.tenor.com/8druEACXtX8AAAAd/tenor.gif)
+
