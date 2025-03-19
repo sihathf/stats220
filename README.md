@@ -20,4 +20,4 @@
 🎓 University of Auckland – [Visit my university](https://www.auckland.ac.nz/en.html)
 
 
-A meme that captures how I currently feel about my university studies is![](https://c.tenor.com/8druEACXtX8AAAAd/tenor.gif)
+[](https://c.tenor.com/8druEACXtX8AAAAd/tenor.gif)
