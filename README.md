@@ -9,7 +9,7 @@
 - I am interested in learning about how data can be visualized and understood.  
 
 
-## My University Experience:
+### My University Experience:
 
 
 1. As a Computer Science student, I've gained a strong foundation in *problem-solving, algorithms, and programming languages*.
