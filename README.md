@@ -13,6 +13,6 @@ A meme that captures how I currently feel about my university studies is![](http
 ## My University Experience:
 
 
-- As a **Computer Science** student, I've gained a strong foundation in problem-solving, algorithms, and programming languages.
-- I’ve been working on projects that involve **data analysis, algorithm optimization, and software design**.
-- My university journey has been a **mix of challenges and learning opportunities**, from tackling tough coding problems to understanding the theory behind algorithms and statistics.
+1. As a **Computer Science** student, I've gained a strong foundation in problem-solving, algorithms, and programming languages.
+2. I’ve been working on projects that involve **data analysis, algorithm optimization, and software design**.
+3. My university journey has been a **mix of challenges and learning opportunities**, from tackling tough coding problems to understanding the theory behind algorithms and statistics.
