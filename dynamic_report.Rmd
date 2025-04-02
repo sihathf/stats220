@@ -1,0 +1,229 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+```{css}
+body {
+  font-family: Verdana, sans-serif;
+  background-color: #f4f4f4;
+    background: linear-gradient(to right, rgba(0, 0, 255, 0.2), rgba(128, 0, 128, 0.6));
+
+  padding: 20px;
+}
+
+h2 {
+  color: Black;
+  text-decoration: underline;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 24px;
+}
+
+h1, h3 {
+  font-family: 'Verdana', sans-serif;
+  color: #333;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.ggplot-container {
+  border: 2px solid #ccc;
+  padding: 20px;
+  background-color: #ffffff;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Adding a border specifically around the bar charts */
+div.figure {
+  border: 3px solid #3498db; /* Blue border for the charts */
+  padding: 15px;
+  margin: 15px;
+  border-radius: 10px;
+}
+
+```
+
+## Internet Ads Tracking Log
+
+This report analyzes an Internet Ads Tracking Log that looks into received ads over a two-week period. This includes 
+
+- **Perceived Relevance**: A bar chart displaying how relevant the Ads were to me.  
+- **Platforms**: A bar chart displaying platforms and social media where I received the ads from. 
+- **Ads types**: A bar chart displaying the different types of ads I received  
+- **Ad Frequency**: A bar chart displaying how many times a day I got the ads
+
+
+```{r}
+library(magick)
+library(tidyverse)
+
+# Read the data 
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRVaAg3eQdeYMgzQM3Tc2A3Rs3QHk4tiAqwwVWZg8C8NthHya7V6hCfybleXdUJrUqch8b3T70r2YLH/pub?output=csv")
+
+# Rename variables 
+latest_data <- logged_data %>%
+  rename(
+    product_type = "What type of product or service was being advertised?",
+    ad_frequency = "In the past 7 days, how many times have you seen ads related to the following topic(s)?",
+    platform = "Which platform did you see the ad on?",
+    relevance = "How relevant do you think these ads are to your personal interests?"
+  )
+
+# Create a frequency table for product types
+product_counts <- latest_data %>%
+  separate_rows(product_type, sep = ", ") %>%
+  count(product_type) %>%
+  arrange(desc(n))
+
+# Create a frequency table for platforms
+platform_counts <- latest_data %>%
+  separate_rows(platform, sep = ", ") %>%
+  count(platform) %>%
+  arrange(desc(n))
+
+# Most common product type advertised
+most_common_product <- product_counts %>%
+  slice(1) %>%
+  pull(product_type)
+
+# Percentage of ads that were very relevant
+very_relevant_pct <- latest_data %>%
+  summarise(pct = mean(relevance == "Very relevant") * 100) %>%
+  pull(pct) %>%
+  round(1)
+
+# Bar chart 1: Frequency of different product types
+ggplot(product_counts, aes(x = reorder(product_type, n), y = n)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  labs(
+    title = "Frequency of Different Advertised Product Types",
+    x = "Product Type",
+    y = "Count"
+  ) +
+  theme_minimal()
+
+# Get the max and min for product counts
+product_max_min <- product_counts %>%
+  summarise(
+    max_count = max(n),
+    min_count = min(n)
+  )
+
+
+
+# Dynamic comment for product types
+product_comment <- paste("The most advertised product type is '", most_common_product, 
+                         "' with a count of ", product_max_min$max_count, ".",
+                         " The least advertised product type has a count of ", product_max_min$min_count, ".", sep = "")
+print(product_comment)
+
+# Bar chart 2: Distribution of ad relevance
+ggplot(latest_data, aes(x = relevance)) +
+  geom_bar(fill = "coral") +
+  labs(
+    title = "Distribution of Ad Relevance to Personal Interests",
+    x = "Perceived Relevance",
+    y = "Count"
+  ) +
+  theme_minimal()
+
+# Get the max and min for relevance counts
+relevance_max_min <- latest_data %>%
+  count(relevance) %>%
+  summarise(
+    max_count = max(n),
+    min_count = min(n)
+  )
+
+# Dynamic comment for ad relevance
+relevance_comment <- paste("The highest number of responses rated ads as 'Very relevant', with a total count of ",
+                           relevance_max_min$max_count, ". The lowest response count is ", relevance_max_min$min_count, ".", sep = "")
+print(relevance_comment)
+
+# Bar chart 3: Ad frequency distribution
+ggplot(latest_data, aes(x = ad_frequency)) +
+  geom_bar(fill = "darkgreen") +
+  labs(
+    title = "Distribution of Ad Frequency in Past 2 weeks",
+    x = "Frequency Range",
+    y = "Count"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Get the max and min for ad frequency counts
+ad_frequency_max_min <- latest_data %>%
+  count(ad_frequency) %>%
+  summarise(
+    max_count = max(n),
+    min_count = min(n)
+  )
+
+# Dynamic comment for ad frequency
+ad_frequency_comment <- paste("The highest frequency of ads seen was ", ad_frequency_max_min$max_count, 
+                              " times, while the lowest was ", ad_frequency_max_min$min_count, ".", sep = "")
+print(ad_frequency_comment)
+
+# Bar chart 4: Platform distribution
+ggplot(platform_counts, aes(x = reorder(platform, n), y = n)) +
+  geom_col(fill = "purple") +
+  coord_flip() +
+  labs(
+    title = "Frequency of Platforms Where Ads Were Seen",
+    x = "Platform",
+    y = "Count"
+  ) +
+  theme_minimal()
+
+# Get the max and min for platform counts
+platform_max_min <- platform_counts %>%
+  summarise(
+    max_count = max(n),
+    min_count = min(n)
+  )
+
+# Dynamic comment for platform distribution
+platform_comment <- paste("The platform with the highest frequency of ads was '", 
+                          platform_counts$platform[which.max(platform_counts$n)], 
+                          "' with a count of ", platform_max_min$max_count, ".", 
+                          " The platform with the lowest ad count had ", platform_max_min$min_count, ".", sep = "")
+print(platform_comment)
+
+
+```
+
